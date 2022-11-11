@@ -65,5 +65,7 @@ var hours = [
         console.log(e.target)
         let textArea = document.getElementById(String(i))
         storage = JSON.parse(localStorage.getItem("tasks"))
+        storage[i]= textArea.value
+        localStorage.setItem("tasks", JSON.stringify(storage))
     });
   }
