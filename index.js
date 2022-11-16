@@ -1,3 +1,4 @@
+//added a var for hours in military time to make easier.
 var hours = [
     "8",
     "9",
@@ -22,29 +23,33 @@ var hours = [
     if(localStorage.getItem("tasks")){
         var storage = JSON.parse(localStorage.getItem("tasks"))
         for (let i = 0; i < hours.length; i++) {
-            containerElement[0].innerHTML += `<div class="row>
-            <h3 class="col-2 time-block hour">
-            ${hours[i]}:00
-            </h3>
-            <textarea class="col-8 ${checkClass(hours[i])}" id="${i}">
+          containerElement[0].innerHTML += `<div class="row">
+                  <h3 class="col-2 time-block hour">
+                    ${hours[i]}:00
+                  </h3>
+                  <textarea class="col-8 ${checkClass(hours[i])}" id="${i}">
                  ${storage[i]}
-                 </textarea>
-                 <button class="col-2 saveBtn"> Save Task</button>
-               </div>;`
-        }
+                  </textarea>
+                  <button class="col-2 saveBtn"> Save Task</button>
+                </div>`;
+        }    
     } else{
         var storage = []
-        for (let i =0; i < hours.length; i++) {
+        for (let i = 0; i < hours.length; i++) {
             containerElement[0].innerHTML += `<div class="row">
-            <h3 class="col-2 time-block hour">
-            ${hours[i]}:00
-            </h3>
-            <textarea class="col-2 saveBtn"> Save Task</button>
-            </div>`;
-        }
-        localStorage.setItem("taks", JSON.stringify(storage))
+                    <h3 class="col-2 time-block hour">
+                      ${hours[i]}:00
+                    </h3>
+                    <textarea class="col-8 ${checkClass(hours[i])}" id="${i}">
+                   ${storage.push("")}
+                    </textarea>
+                    <button class="col-2 saveBtn"> Save Task</button>
+                  </div>`;
+          }   
+          localStorage.setItem("tasks",JSON.stringify(storage))
     }
-  }
+    
+}
 
   function checkClass(time) {
     var now = moment().hours();
@@ -61,7 +66,7 @@ var hours = [
   }
   window.onload = populateTable();
   for (let i = 0; i < saveBtns.length; i++) {
-    saveBtns[i].addEventsListener("click", function (e){
+    saveBtns[i].addEventListener("click", function (e){
         console.log(e.target)
         let textArea = document.getElementById(String(i))
         storage = JSON.parse(localStorage.getItem("tasks"))
@@ -69,3 +74,4 @@ var hours = [
         localStorage.setItem("tasks", JSON.stringify(storage))
     });
   }
+ 
