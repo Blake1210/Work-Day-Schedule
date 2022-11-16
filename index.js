@@ -19,6 +19,7 @@ var hours = [
 
   var containerElement = document.getElementsByClassName("container");
 
+  //function to create the table for the tasks
   function populateTable() {
     if(localStorage.getItem("tasks")){
         var storage = JSON.parse(localStorage.getItem("tasks"))
@@ -51,6 +52,7 @@ var hours = [
     
 }
 
+// function that will check to see if each hour is past, present, or in the future and designates the class for it.
   function checkClass(time) {
     var now = moment().hours();
 
@@ -64,8 +66,11 @@ var hours = [
 
     return "future";
   }
+
+  //when the table is loaded, the table will populate
   window.onload = populateTable();
   for (let i = 0; i < saveBtns.length; i++) {
+    //added an event listener to the saveBtns that will store the saved tasks
     saveBtns[i].addEventListener("click", function (e){
         console.log(e.target)
         let textArea = document.getElementById(String(i))
